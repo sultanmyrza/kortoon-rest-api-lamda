@@ -4,8 +4,8 @@ const { URL } = require('url');
 
 const BASE_URL = 'https://www.gotoon.net';
 const BACK_UP_BASE_UR = 'https://kukudas.xyz';
-const gotoonUrl = new URL(`${BASE_URL}/toon/하룻밤-아내`);
-const gotoonScenesUrl = new URL(`${BASE_URL}/view/185382/하룻밤-아내-084`);
+const gotoonUrl = `${BASE_URL}/toon/하룻밤-아내`;
+const gotoonScenesUrl = `${BASE_URL}/view/185382/하룻밤-아내-084`;
 
 function fetchGotoons(url = BASE_URL) {
   return new Promise((resolve, reject) => {
@@ -40,7 +40,7 @@ function fetchGotoons(url = BASE_URL) {
 
 function fetchGotoon(url = gotoonUrl) {
   return new Promise((resolve, reject) => {
-    fetch(url)
+    fetch(new URL(url))
       .then(response => response.text())
       .then(body => {
         const $ = cheerio.load(body);
@@ -78,7 +78,7 @@ function fetchGotoon(url = gotoonUrl) {
 
 function fetchGotoonScenes(url = gotoonScenesUrl) {
   return new Promise((resolve, reject) => {
-    fetch(url)
+    fetch(new URL(url))
       .then(response => response.text())
       .then(body => {
         const $ = cheerio.load(body);

@@ -3,10 +3,8 @@ const fetch = require('node-fetch');
 const { URL } = require('url');
 
 const BASE_URL = 'https://cointoon.net';
-const cointoonUrl = new URL(`${BASE_URL}/comic/435/오렌지+마말레이드`);
-const cointoonScenesUrl = new URL(
-  `${BASE_URL}/comic_view/24105/오렌지+마말레이드+1화+-+만남`
-);
+const cointoonUrl = `${BASE_URL}/comic/435/오렌지+마말레이드`;
+const cointoonScenesUrl = `${BASE_URL}/comic_view/24105/오렌지+마말레이드+1화+-+만남`;
 
 function fetchCointoons(url = BASE_URL) {
   return new Promise((resolve, reject) => {
@@ -38,7 +36,7 @@ function fetchCointoons(url = BASE_URL) {
 
 function fetchCointoon(url = cointoonUrl) {
   return new Promise((resolve, reject) => {
-    fetch(url)
+    fetch(new URL(url))
       .then(response => response.text())
       .then(async body => {
         const $ = cheerio.load(body);
@@ -78,7 +76,7 @@ function fetchCointoon(url = cointoonUrl) {
 
 function fetchCointoonScenes(url = cointoonScenesUrl) {
   return new Promise((resolve, reject) => {
-    fetch(url)
+    fetch(new URL(url))
       .then(response => response.text())
       .then(body => {
         const $ = cheerio.load(body);

@@ -4,8 +4,8 @@ const { URL } = require('url');
 const Base = require('./Base');
 
 const BASE_URL = 'https://toonkor.life';
-const toonkorUrl = new URL(`${BASE_URL}/수화`);
-const toonkorScenesUrl = new URL(`${BASE_URL}/수화_2부_5화.html`);
+const toonkorUrl = `${BASE_URL}/수화`;
+const toonkorScenesUrl = `${BASE_URL}/수화_2부_5화.html`;
 
 function fetchToonkors(url = BASE_URL) {
   return new Promise((resolve, reject) => {
@@ -44,7 +44,7 @@ function fetchToonkors(url = BASE_URL) {
 
 function fetchToonkor(url = toonkorUrl) {
   return new Promise((resolve, reject) => {
-    fetch(url)
+    fetch(new URL(url))
       .then(res => res.text())
       .then(body => {
         let $ = cheerio.load(body);
@@ -65,9 +65,9 @@ function fetchToonkor(url = toonkorUrl) {
             title: $(element)
               .find('.content__title')
               .attr('alt'),
-            url: $(element)
+            url: `${BASE_URL}${$(element)
               .find('.content__title')
-              .attr('data-role'),
+              .attr('data-role')}`,
             date: $(element)
               .find('.episode__index')
               .text(),
@@ -93,7 +93,7 @@ function fetchToonkor(url = toonkorUrl) {
 
 function fetchToonkorScenes(url = toonkorScenesUrl) {
   return new Promise((resolve, reject) => {
-    fetch(url)
+    fetch(new URL(url))
       .then(res => res.text())
       .then(body => {
         let $ = cheerio.load(body);
