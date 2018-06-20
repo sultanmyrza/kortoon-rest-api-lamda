@@ -19,7 +19,7 @@ function fetchCointoons(url = BASE_URL) {
           const kortoon = {
             title: img.attribs.alt,
             summary: '',
-            url: a.attribs.href,
+            url: decodeURIComponent(a.attribs.href),
             thumbnailUrl: img.attribs.src,
             photoUrl: ''
           };
@@ -52,7 +52,7 @@ function fetchCointoon(url = cointoonUrl) {
           const episode = {
             title: element.firstChild.data,
             summary: '',
-            url: element.attribs.href,
+            url: encodeURIComponent(element.attribs.href),
             thumbnailUrl: '',
             photoUrl: ''
           };
