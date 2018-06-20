@@ -9,6 +9,28 @@ provider:
   timeout: 10
 
 functions: # for crud operations
+
+  getKortoons:
+    handler: handler.getKortoons
+    events:
+      - http:
+          path: kortoons/provider/{providerId}
+          method: get
+          cors: true
+  getKortoon:
+    handler: handler.getKortoon
+    events:
+      - http: 
+          path: kortoons/provider/{providerId}/kortoon
+          method: get
+          cors: true
+  getEpisodeScenes:
+    handler: handler.getEpisodeScenes
+    events:
+      - http: 
+          path: kortoons/provider/{providerId}/scenes
+          method: get
+          cors: true
   create:
     handler: handler.create # point to exported create function in handler.js
     events: 
@@ -21,13 +43,6 @@ functions: # for crud operations
     events:
       - http:
           path: kortoons/{id} # path will be ${domain}/${stage}/kortoons/1
-          method: get
-          cors: true
-  getAll:
-    handler: handler.getAll
-    events: 
-      - http: 
-          path: kortoons 
           method: get
           cors: true
   update:
