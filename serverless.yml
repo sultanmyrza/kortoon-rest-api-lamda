@@ -38,12 +38,19 @@ functions: # for crud operations
           path: kortoons # path will be ${domain}/${stage}/kortoons e.g example.com/dev/kortoons
           method: post
           cors: true
-  getOne:
-    handler: handler.getOne
+  getAll:
+    handler: handler.getAll
     events:
       - http:
-          path: kortoons/{id} # path will be ${domain}/${stage}/kortoons/1
+          path: kortoons
           method: get
+          cors: true
+  deleteAll:
+    handler: handler.deleteAll
+    events:
+      - http:
+          path: kortoons
+          method: delete
           cors: true
   update:
     handler: handler.update
