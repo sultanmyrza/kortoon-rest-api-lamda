@@ -47,23 +47,24 @@ function fetchCointoon(url = cointoonUrl) {
         const kortoonSummary = $('.toon_font p')[0].children[0].data;
 
         // FETCH KORTOON EPISODES
+        const episodeTable = $('.toon_tlist li a');
+        const episodesCount = episodeTable.length;
         const episodes = [];
-        $('.toon_tlist li a').each((index, element) => {
+        episodeTable.each((index, element) => {
           const episode = {
             title: element.firstChild.data,
-            summary: '',
             url: encodeURIComponent(element.attribs.href),
-            thumbnailUrl: '',
-            photoUrl: ''
+            episodeIndex: episodesCount - index
           };
           episodes.push(episode);
         });
-
+        // COLLECT DATA IN 1 OBJECT
         const kortoon = {
           title: kortoonTitle,
           summary: kortoonSummary,
           photoUrl: kortoonPhotoUrl,
-          episodes: episodes
+          episodes: episodes,
+          episodesCount: episodesCount
         };
 
         resolve(kortoon);

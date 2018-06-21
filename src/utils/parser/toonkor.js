@@ -18,16 +18,12 @@ function fetchToonkors(url = BASE_URL) {
           thumbnailUrl = $(element)
             .find('img')
             .attr('src');
-          bigPhotoUrl = thumbnailUrl
-            .replace('thumb-', '')
-            .replace('_150x150', '');
           const kortoon = {
             title: $(element).attr('alt'),
             summary: $(element)
               .find('.toon-summary')
               .text(),
             thumbnailUrl: thumbnailUrl,
-            bigPhotoUrl: bigPhotoUrl,
             url: `${BASE_URL}${$(element)
               .find('a')
               .attr('href')}`
@@ -68,9 +64,6 @@ function fetchToonkor(url = toonkorUrl) {
             url: `${BASE_URL}${$(element)
               .find('.content__title')
               .attr('data-role')}`,
-            date: $(element)
-              .find('.episode__index')
-              .text(),
             episodeIndex: episodesCount - index
           };
           episodes.push(episode);

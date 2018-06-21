@@ -51,21 +51,24 @@ function fetchGotoon(url = gotoonUrl) {
         const kortoonPhotoUrl = $('.toonInfo .preview .thumbnail')[0].firstChild
           .attribs.src;
 
+        const episodeTable = $('.toonEpisodeList a');
+        const episodesCount = episodeTable.length;
         let episodes = [];
-        $('.toonEpisodeList a').each((index, element) => {
-          let title = element.childNodes[3].childNodes[0].data;
-          let url = `${BASE_URL}${element.attribs.href}`;
-          episodes.push({
-            title,
-            url
-          });
+        episodeTable.each((index, element) => {
+          const episode = {
+            title: element.childNodes[3].childNodes[0].data,
+            url: `${BASE_URL}${element.attribs.href}`,
+            episodeIndex: episodesCount - index
+          };
+          episodes.push(episode);
         });
 
         const kortoon = {
           title: kortoonTitle,
           summary: kortoonSummary,
           photoUrl: kortoonPhotoUrl,
-          episodes: episodes
+          episodes: episodes,
+          episodesCount: episodesCount
         };
 
         resolve(kortoon);
