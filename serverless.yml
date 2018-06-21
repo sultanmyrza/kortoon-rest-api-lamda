@@ -31,43 +31,7 @@ functions: # for crud operations
           path: kortoons/provider/{providerId}/scenes
           method: get
           cors: true
-  create:
-    handler: handler.create # point to exported create function in handler.js
-    events: 
-      - http:
-          path: kortoons # path will be ${domain}/${stage}/kortoons e.g example.com/dev/kortoons
-          method: post
-          cors: true
-  getAll:
-    handler: handler.getAll
-    events:
-      - http:
-          path: kortoons
-          method: get
-          cors: true
-  deleteAll:
-    handler: handler.deleteAll
-    events:
-      - http:
-          path: kortoons
-          method: delete
-          cors: true
-  update:
-    handler: handler.update
-    events: 
-      - http:
-          path: kortoons/{id}
-          method: put
-          cors: true
-  delete:
-    handler: handler.delete
-    events: 
-      - http:
-          path: kortoons/{id}
-          method: delete
-          cors: true
           
-
 
 plugins: 
   - serverless-offline
