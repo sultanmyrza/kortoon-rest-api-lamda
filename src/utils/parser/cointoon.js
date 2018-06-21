@@ -53,7 +53,7 @@ function fetchCointoon(url = cointoonUrl) {
         episodeTable.each((index, element) => {
           const episode = {
             title: element.firstChild.data,
-            url: encodeURIComponent(element.attribs.href),
+            url: decodeURIComponent(element.attribs.href),
             episodeIndex: episodesCount - index
           };
           episodes.push(episode);
